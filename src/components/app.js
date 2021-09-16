@@ -5,8 +5,10 @@ import Footer from "./Footer";
 
 export default class App extends Component {
   maxId = 0;
+  maxKey = 0;
   state = {
     displayFilter: 'all',
+    editDescription: null,
     taskData: [],
     filterButtonData: [
       { id: 'b0', classSelect: "all", filterName: 'All', toggle: true },
@@ -14,6 +16,7 @@ export default class App extends Component {
       { id: 'b2', classSelect: 'completed', filterName: 'Completed', toggle: false }
     ]
   };
+
   filterItems = ( select ) => {
     if ( select === 'all' ) return this.state.taskData;
     if ( select === 'active' ) return this.state.taskData.filter( ( item ) => !item.done );
@@ -30,7 +33,46 @@ export default class App extends Component {
       displayFilter: classSelect,
       copyFilterButtonData,
     } );
+  };
 
+  showEditTask = ( id ) => {
+    const state = this.state.taskData;
+    const [...editTask] = state.map( ( item ) => {
+      if ( item.id !== id && item.edit === 'editing' ) {
+        item.edit = null
+      }
+      if ( item.id === id ) {
+        item.edit = 'editing';
+      }
+      return item;
+    } );
+    this.setState( {
+      taskData: editTask
+    } );
+  };
+
+  editItemTask = ( text ) => {
+    this.setState( {
+      editDescription: text
+    } );
+  };
+
+  editSubmit = ( event, id ) => {
+    const editValue = this.state.editDescription;
+    const state = this.state.taskData;
+    event.preventDefault();
+    if ( editValue.length > 0 ) {
+      const [...editTask] = state.map( ( item ) => {
+        if ( item.id === id ) {
+          item.description = editValue;
+          item.edit = '';
+        }
+        return item;
+      } );
+      this.setState( {
+        taskData: editTask
+      } );
+    }
   };
 
   createTodoItem( description ) {
@@ -40,19 +82,22 @@ export default class App extends Component {
       classItem: null,
       createdItem: "created 5 minutes ago",
       done: false,
-      edit: false,
-      id: this.maxId++
+      edit: null,
+      id: this.maxId++,
+      keyTask: this.maxKey++
     };
   };
 
   addItem = ( text ) => {
-    const newItem = this.createTodoItem( text );
-    this.setState( ( { taskData } ) => {
-      const newArr = [...taskData, newItem];
-      return {
-        taskData: newArr
-      };
-    } );
+    if ( text ) {
+      const newItem = this.createTodoItem( text );
+      this.setState( ( { taskData } ) => {
+        const newArr = [...taskData, newItem];
+        return {
+          taskData: newArr
+        };
+      } );
+    }
   };
 
   toggleCompleted = ( id, classItem ) => {
@@ -105,6 +150,9 @@ export default class App extends Component {
             <TaskList task={ this.filterItems( displayFilter ) }
                       onToggleCompleted={ this.toggleCompleted }
                       onDeleted={ this.deleteItem }
+                      showEditTask={ this.showEditTask }
+                      editItemTask={ this.editItemTask }
+                      editSubmit={ this.editSubmit }
             />
             <Footer filter={ filterButtonData }
                     onSelectedButton={ this.selectedButton }
@@ -115,4 +163,5 @@ export default class App extends Component {
         </section>
     );
   }
-};
+}
+;

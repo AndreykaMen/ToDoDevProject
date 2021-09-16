@@ -1,17 +1,18 @@
 import React from "react";
 import Task from "./Task";
 
-const TaskList = ( { task, onToggleCompleted, onDeleted } ) => {
+const TaskList = ( { task, onToggleCompleted, onDeleted, showEditTask, editItemTask, editSubmit } ) => {
   const taskElement = task.map( item => {
-    const { id, classItem, ...taskProps } = item;
+    const { keyTask, ...taskProps } = item;
     return (
-        <li key={ id } className={ classItem }>
-          <Task
-              onToggleCompleted={ () => onToggleCompleted( id, classItem ) }
-              onDeletedTask={ () => onDeleted( id ) }
+        <Task key={ keyTask + 'li' }
+              onToggleCompleted={ onToggleCompleted }
+              onDeletedTask={ onDeleted }
+              showEditTask={ showEditTask }
+              editItemTask={ editItemTask }
+              editSubmit={ editSubmit }
               { ...taskProps }
-          />
-        </li>
+        />
     );
   } );
   return (

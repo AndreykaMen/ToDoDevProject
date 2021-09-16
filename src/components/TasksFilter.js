@@ -7,7 +7,9 @@ const TasksFilter = ( { filterData, onSelectedButton } ) => {
     return (
         <li key={ id }>
           <button className={ classSelect }
-                  onClick={ () => onSelectedButton( id, classSelect ) }>{ filterName }</button>
+                  onClick={ () => onSelectedButton( id, classSelect ) }
+                  disabled={ toggle }
+          >{ filterName }</button>
         </li>
     );
   } );
