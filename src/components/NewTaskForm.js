@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 export default class NewTaskForm extends Component {
+
   state = {
     description: ''
   };

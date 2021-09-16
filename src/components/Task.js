@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import { formatDistanceToNow } from 'date-fns';
 
 const Task = ( {
                  id, classItem, done, description, createdItem,
@@ -15,6 +17,12 @@ const Task = ( {
         />
       </form>
       : null;
+
+  const dateCreateTask = formatDistanceToNow( createdItem, {
+    includeSeconds: true,
+    addSuffix: true
+  } );
+
   return (
       <li key={ id } className={ classItem + ' ' + edit }>
         <div className="view">
@@ -24,7 +32,7 @@ const Task = ( {
           />
           <label>
             <span className="description">{ description }</span>
-            <span className="created">{ createdItem }</span>
+            <span className="created">Created { dateCreateTask }</span>
           </label>
           <button className="icon icon-edit" onClick={ () => showEditTask( id ) }/>
           <button className="icon icon-destroy" onClick={ () => onDeletedTask( id ) }/>
@@ -32,6 +40,11 @@ const Task = ( {
         { inputEdit }
       </li>
   );
+};
+Task.propTypes = {
+  edit: PropTypes.string.isRequired,
+  classItem: PropTypes.string.isRequired,
+  dateCreateTask: PropTypes.string
 };
 
 export default Task;

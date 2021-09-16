@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "./Task";
+import PropTypes from "prop-types";
 
 const TaskList = ( { task, onToggleCompleted, onDeleted, showEditTask, editItemTask, editSubmit } ) => {
   const taskElement = task.map( item => {
@@ -17,8 +18,21 @@ const TaskList = ( { task, onToggleCompleted, onDeleted, showEditTask, editItemT
   } );
   return (
       <ul className="todo-list">
-        { taskElement }
+        { taskElement.reverse() }
       </ul>
   );
+};
+
+TaskList.propTypes = {
+  onToggleCompleted: PropTypes.func.isRequired,
+  onDeleted: PropTypes.func.isRequired,
+  showEditTask: PropTypes.func.isRequired,
+  editItemTask: PropTypes.func.isRequired,
+  editSubmit: PropTypes.func.isRequired,
+  taskElement: PropTypes.element,
+  taskProps: PropTypes.arrayOf( PropTypes.object ),
+  keyTask: PropTypes.number,
+  task: PropTypes.arrayOf( PropTypes.object ).isRequired,
+
 };
 export default TaskList;

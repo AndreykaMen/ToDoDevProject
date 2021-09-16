@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import TaskList from "./TaskList";
 import NewTaskForm from "./NewTaskForm";
 import Footer from "./Footer";
@@ -8,7 +9,7 @@ export default class App extends Component {
   maxKey = 0;
   state = {
     displayFilter: 'all',
-    editDescription: null,
+    editDescription: '',
     taskData: [],
     filterButtonData: [
       { id: 'b0', classSelect: "all", filterName: 'All', toggle: true },
@@ -39,7 +40,7 @@ export default class App extends Component {
     const state = this.state.taskData;
     const [...editTask] = state.map( ( item ) => {
       if ( item.id !== id && item.edit === 'editing' ) {
-        item.edit = null
+        item.edit = '';
       }
       if ( item.id === id ) {
         item.edit = 'editing';
@@ -79,10 +80,10 @@ export default class App extends Component {
     return {
       description,
       important: false,
-      classItem: null,
-      createdItem: "created 5 minutes ago",
+      classItem: '',
+      createdItem: Date.now(),
       done: false,
-      edit: null,
+      edit: '',
       id: this.maxId++,
       keyTask: this.maxKey++
     };
@@ -105,7 +106,7 @@ export default class App extends Component {
       if ( elem.id === id ) {
         elem.done = !elem.done;
         elem.classItem = "completed";
-        if ( classItem ) elem.classItem = null;
+        if ( classItem ) elem.classItem = '';
       }
       return elem;
     } );
@@ -138,6 +139,7 @@ export default class App extends Component {
   };
 
   render() {
+
     const { displayFilter, taskData, filterButtonData } = this.state;
     const countActiveTask = taskData.filter( ( el ) => !el.done ).length;
     return (
