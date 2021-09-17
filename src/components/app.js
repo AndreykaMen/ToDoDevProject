@@ -83,8 +83,7 @@ class App extends Component {
       taskData: taskData.map( elem => {
         if ( elem.id === id ) {
           elem.done = !elem.done;
-          elem.classItem = "completed";
-          if ( classItem ) elem.classItem = '';
+          classItem ? elem.classItem = '' : elem.classItem = "completed";
         }
         return elem;
       } )
