@@ -32,7 +32,7 @@ export default class App extends Component {
     } );
     this.setState( {
       displayFilter: classSelect,
-      copyFilterButtonData,
+      filterButtonData: copyFilterButtonData,
     } );
   };
 

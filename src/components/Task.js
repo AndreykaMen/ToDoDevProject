@@ -8,7 +8,8 @@ const Task = ( {
                } ) => {
   const inputEdit = edit
       ?
-      <form className="new-todo-form" onSubmit={ ( event ) => editSubmit( event, id ) }>
+      <form className="new-todo-form" onSubmit={ ( event ) => editSubmit( event, id ) }
+            onBlur={ () => showEditTask( id ) }>
         <input type="text" className="edit"
                autoFocus
                defaultValue={ description }
