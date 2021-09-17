@@ -4,7 +4,7 @@ import TaskList from "./TaskList";
 import NewTaskForm from "./NewTaskForm";
 import Footer from "./Footer";
 
-export default class App extends Component {
+class App extends Component {
   maxId = 0;
   maxKey = 0;
   state = {
@@ -24,33 +24,19 @@ export default class App extends Component {
     if ( select === 'completed' ) return this.state.taskData.filter( ( item ) => item.done );
   };
 
-  selectedButton = ( id, classSelect ) => {
-    let [...copyFilterButtonData] = this.state.filterButtonData;
-    copyFilterButtonData.map( ( elem ) => {
-      elem.id === id ? elem.toggle = true : elem.toggle = false;
-      return elem;
-    } );
-    this.setState( {
+  selectedButton = ( id, classSelect ) => this.setState( ( { filterButtonData } ) => {
+    return {
       displayFilter: classSelect,
-      filterButtonData: copyFilterButtonData,
-    } );
-  };
+      filterButtonData: filterButtonData.map( ( elem ) => {
+        elem.id === id ? elem.toggle = true : elem.toggle = false;
+        return elem;
+      } )
+    };
+  } );
 
-  showEditTask = ( id ) => {
-    const state = this.state.taskData;
-    const [...editTask] = state.map( ( item ) => {
-      if ( item.id !== id && item.edit === 'editing' ) {
-        item.edit = '';
-      }
-      if ( item.id === id ) {
-        item.edit = 'editing';
-      }
-      return item;
-    } );
-    this.setState( {
-      taskData: editTask
-    } );
-  };
+  showEditTask = ( id ) => this.setState( ( { taskData } ) => {
+    return taskData.map( ( item ) => item.id !== id && item.edit === 'editing' ? item.edit = '' : item.id === id ? item.edit = 'editing' : null );
+  } );
 
   editItemTask = ( text ) => {
     this.setState( {
@@ -59,21 +45,18 @@ export default class App extends Component {
   };
 
   editSubmit = ( event, id ) => {
-    const editValue = this.state.editDescription;
-    const state = this.state.taskData;
     event.preventDefault();
-    if ( editValue.length > 0 ) {
-      const [...editTask] = state.map( ( item ) => {
-        if ( item.id === id ) {
-          item.description = editValue;
-          item.edit = '';
-        }
-        return item;
-      } );
-      this.setState( {
-        taskData: editTask
-      } );
-    }
+    if ( this.state.editDescription.length > 0 ) this.setState( ( { taskData, editDescription } ) => {
+      return {
+        taskData: taskData.map( item => {
+          if ( item.id === id ) {
+            item.description = editDescription;
+            item.edit = '';
+          }
+          return item;
+        } )
+      };
+    } );
   };
 
   createTodoItem( description ) {
@@ -90,56 +73,33 @@ export default class App extends Component {
   };
 
   addItem = ( text ) => {
-    if ( text ) {
-      const newItem = this.createTodoItem( text );
-      this.setState( ( { taskData } ) => {
-        const newArr = [...taskData, newItem];
-        return {
-          taskData: newArr
-        };
-      } );
-    }
-  };
-
-  toggleCompleted = ( id, classItem ) => {
-    const [...newStateTask] = this.state.taskData.map( ( elem ) => {
-      if ( elem.id === id ) {
-        elem.done = !elem.done;
-        elem.classItem = "completed";
-        if ( classItem ) elem.classItem = '';
-      }
-      return elem;
-    } );
-    this.setState( {
-      newStateTask
+    if ( text ) this.setState( ( { taskData } ) => {
+      return { taskData: [...taskData, this.createTodoItem( text )] };
     } );
   };
 
-  deleteItem = ( id ) => {
-    this.setState( ( { taskData } ) => {
-      const idx = taskData.findIndex( ( el ) => el.id === id );
-      const copyTaskData = taskData.filter( ( item, itemIdx ) => {
-        return itemIdx !== idx;
-      } );
-      return {
-        taskData: copyTaskData
-      };
-    } );
-  };
+  toggleCompleted = ( id, classItem ) => this.setState( ( { taskData } ) => {
+    return {
+      taskData: taskData.map( elem => {
+        if ( elem.id === id ) {
+          elem.done = !elem.done;
+          elem.classItem = "completed";
+          if ( classItem ) elem.classItem = '';
+        }
+        return elem;
+      } )
+    };
+  } );
 
-  deleteCompletedList = () => {
-    this.setState( ( { taskData } ) => {
-      taskData = taskData.filter( ( item ) => {
-        return !item.done;
-      } );
-      return {
-        taskData: taskData
-      };
-    } );
-  };
+  deleteItem = ( id ) => this.setState( ( { taskData } ) => {
+    return { taskData: taskData.filter( ( item, itemIdx ) => itemIdx !== taskData.findIndex( ( el ) => el.id === id ) ) };
+  } );
+
+  deleteCompletedList = () => this.setState( ( { taskData } ) => {
+    return { taskData: taskData.filter( ( item ) => !item.done ) };
+  } );
 
   render() {
-
     const { displayFilter, taskData, filterButtonData } = this.state;
     const countActiveTask = taskData.filter( ( el ) => !el.done ).length;
     return (
@@ -156,7 +116,7 @@ export default class App extends Component {
                       editItemTask={ this.editItemTask }
                       editSubmit={ this.editSubmit }
             />
-            <Footer filter={ filterButtonData }
+            <Footer filterData={ filterButtonData }
                     onSelectedButton={ this.selectedButton }
                     deleteCompletedList={ this.deleteCompletedList }
                     countActiveTask={ countActiveTask }
@@ -166,4 +126,5 @@ export default class App extends Component {
     );
   }
 }
-;
+
+export default App;

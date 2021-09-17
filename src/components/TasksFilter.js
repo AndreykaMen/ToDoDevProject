@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const TasksFilter = ( { filterData, onSelectedButton } ) => {
+
   return filterData.map( item => {
     let { id, classSelect, filterName, toggle } = item;
     if ( toggle ) classSelect += ' selected';
@@ -15,5 +17,8 @@ const TasksFilter = ( { filterData, onSelectedButton } ) => {
   } );
 
 };
-
+TasksFilter.propTypes = {
+  filterData: PropTypes.arrayOf( PropTypes.object ).isRequired,
+  onSelectedButton: PropTypes.func.isRequired,
+};
 export default TasksFilter;

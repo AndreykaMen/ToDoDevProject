@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { formatDistanceToNow } from 'date-fns';
 
 const Task = ( {
-                 id, classItem, done, description, createdItem,
-                 edit, onToggleCompleted, onDeletedTask, showEditTask, editItemTask, editSubmit
+                 id, classItem, done, description, createdItem, edit,
+                 onToggleCompleted, onDeletedTask, showEditTask,
+                 editItemTask, editSubmit
                } ) => {
   const inputEdit = edit
       ?
-      <form className="new-todo-form" onSubmit={ ( event ) => editSubmit( event, id ) }
-            onBlur={ () => showEditTask( id ) }>
+      <form className="new-todo-form" onSubmit={ ( event ) => editSubmit( event, id ) }>
         <input type="text" className="edit"
                autoFocus
                defaultValue={ description }
@@ -43,9 +43,17 @@ const Task = ( {
   );
 };
 Task.propTypes = {
-  edit: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   classItem: PropTypes.string.isRequired,
-  dateCreateTask: PropTypes.string
+  done: PropTypes.bool.isRequired,
+  description: PropTypes.string.isRequired,
+  createdItem: PropTypes.number.isRequired,
+  edit: PropTypes.string.isRequired,
+  onToggleCompleted: PropTypes.func.isRequired,
+  onDeletedTask: PropTypes.func.isRequired,
+  showEditTask: PropTypes.func.isRequired,
+  editItemTask: PropTypes.func.isRequired,
+  editSubmit: PropTypes.func.isRequired,
 };
 
 export default Task;

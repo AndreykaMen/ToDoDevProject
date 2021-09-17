@@ -30,8 +30,6 @@ TaskList.propTypes = {
   editItemTask: PropTypes.func.isRequired,
   editSubmit: PropTypes.func.isRequired,
   taskElement: PropTypes.element,
-  taskProps: PropTypes.arrayOf( PropTypes.object ),
-  keyTask: PropTypes.number,
   task: PropTypes.arrayOf( PropTypes.object ).isRequired,
 
 };
