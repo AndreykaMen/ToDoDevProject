@@ -1,35 +1,41 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class NewTaskForm extends Component {
-
   state = {
-    description: ''
+    description: '',
   };
 
-  onLabelChange = ( event ) => {
-    this.setState( {
-      description: event.target.value
-    } );
+  onLabelChange = (event) => {
+    this.setState({
+      description: event.target.value,
+    });
   };
 
-  onSubmit = ( event ) => {
+  onSubmit = (event) => {
+    const { onItemAdded } = this.props;
+    const { description } = this.state;
     event.preventDefault();
-    this.props.onItemAdded( this.state.description );
-    this.setState( {
-      description: ''
-    } );
+    onItemAdded(description);
+    this.setState({
+      description: '',
+    });
   };
 
   render() {
+    const { description } = this.state;
     return (
-        <form className="new-todo-form" onSubmit={ this.onSubmit }>
-          <input className="new-todo" placeholder="What needs to be done?"
-                 autoFocus
-                 onChange={ this.onLabelChange }
-                 value={ this.state.description }
-          />
-        </form>
+      <form className="new-todo-form" onSubmit={this.onSubmit}>
+        <input
+          className="new-todo"
+          placeholder="What needs to be done?"
+          onChange={this.onLabelChange}
+          value={description}
+        />
+      </form>
     );
   }
-
+}
+NewTaskForm.propTypes = {
+  onItemAdded: PropTypes.func.isRequired,
 };
