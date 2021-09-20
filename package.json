@@ -63,9 +63,9 @@
       }
   },
   "lint-staged": {
-      "*.js": [
-          "npm run lint:fix",
-          "prettier format --include",
+      "*.{js,jsx}": [
+          "npm start lint:fix",
+          "prettier format",
           "git add ."
       ]
   }
