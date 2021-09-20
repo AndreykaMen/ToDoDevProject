@@ -21,10 +21,10 @@ class App extends Component {
   };
 
   filterItems = (select) => {
-    const { taskData } = this.state;
+        const { taskData } = this.state;
     if (select === 'all') return taskData;
-    if (select === 'active') return taskData.filter((item) => !item.done);
-    if (select === 'completed') return taskData.filter((item) => item.done);
+        if (select === 'active') return taskData.filter((item) => !item.done);
+            if (select === 'completed') return taskData.filter((item) => item.done);
   };
 
   selectedButton = (id, classSelect) =>
