@@ -64,7 +64,7 @@
   },
   "lint-staged": {
       "*.{js,jsx}": [
-          "npm start lint:fix",
+          "npm run lint:fix",
           "prettier format --write",
           "git add ."
       ]
