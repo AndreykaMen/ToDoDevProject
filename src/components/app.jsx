@@ -41,6 +41,7 @@ class App extends Component {
         item.id !== id && item.edit === 'editing' ? (item.edit = '') : item.id === id ? (item.edit = 'editing') : null
       )
     );
+
   editItemTask = (text) =>
     this.setState({
       editDescription: text,
@@ -87,7 +88,7 @@ class App extends Component {
   createTodoItem = (textDescriptor) => ({
     description: textDescriptor,
     important: false,
-    classItem: '',
+        classItem: '',
     createdItem: Date.now(),
     done: false,
     edit: '',
