@@ -14,9 +14,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prettier": "prettier --write .",
+    "lint": "eslint \"**/*.{js,jsx}\"",
+    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix",
+    "prettier": "prettier --write src/**/*.{js,jsx}",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
