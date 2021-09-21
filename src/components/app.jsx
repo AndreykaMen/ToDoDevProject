@@ -19,11 +19,11 @@ class App extends Component {
     ],
   };
 
-  filterItems = (select) => {
+  filterItems = (select) =>{
     const { taskData } = this.state;
-    if (select === 'all') return taskData;
-    if (select === 'active') return taskData.filter((item) => !item.done);
-    if (select === 'completed') return taskData.filter((item) => item.done)
+        if (select === 'all') return taskData;
+            if (select === 'active') return taskData.filter((item) => !item.done);
+                if (select === 'completed') return taskData.filter((item) => item.done);
   };
 
   selectedButton = (id, classSelect) =>
@@ -88,7 +88,7 @@ class App extends Component {
   createTodoItem = (textDescriptor) => ({
     description: textDescriptor,
     important: false,
-        classItem: '',
+    classItem: '',
     createdItem: Date.now(),
     done: false,
     edit: '',
