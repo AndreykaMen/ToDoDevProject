@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier  --write .",
+    "prettier": "prettier  — write .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -58,14 +58,15 @@
     "prettier": "^2.4.1"
   },
   "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+      "hooks": {
+          "pre-commit": "lint-staged"
+      }
   },
   "lint-staged": {
-    "*.jsx": [
-      "npm run lint:fix",
-      "git add"
-    ]
+    "*.{js,jsx}": [
+        "npm run lint:fix",
+        "prettier --write",
+          "git add"
+      ]
   }
 }
