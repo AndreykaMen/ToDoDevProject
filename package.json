@@ -14,9 +14,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
-    "prettier": "prettier  ./src",
+    "lint": "eslint \"**/*.{js,jsx}\"",
+    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix",
+    "prettier": "prettier  — write src/**/*.{js,jsx}",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -63,8 +63,8 @@
       }
   },
   "lint-staged": {
-      "*.{js|jsx}": [
-          "lint:fix",
+      "*.jsx": [
+          "npm run lint:fix",
           "prettier",
           "git add"
       ]

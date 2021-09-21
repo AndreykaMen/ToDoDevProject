@@ -1,6 +1,6 @@
 import React from 'react';
-import Task from './Task';
 import PropTypes from 'prop-types';
+import Task from './Task';
 
 const TaskList = ({ task, onToggleCompleted, onDeleted, showEditTask, editItemTask, editSubmit }) => {
   const taskElement = task.map((item) => {
