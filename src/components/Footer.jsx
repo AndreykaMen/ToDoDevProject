@@ -8,7 +8,7 @@ const Footer = ({ filterData, onSelectedButton, deleteCompletedList, countActive
     <ul className="filters">
       <TasksFilter filterData={filterData} onSelectedButton={onSelectedButton} />
     </ul>
-    <button type="button" className="clear-completed" onClick= { deleteCompletedList }>
+    <button type="button" className="clear-completed" onClick={deleteCompletedList}>
       Clear completed
     </button>
   </footer>
