@@ -61,7 +61,7 @@
     "v4": "^0.0.1"
   },
   "lint-staged": {
-    "*.js": [
+    "**/*.js": [
         "eslint \"**/*.{js,jsx}\" --fix",
       "npm run format"
     ]
