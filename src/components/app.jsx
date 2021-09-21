@@ -8,6 +8,7 @@ class App extends Component {
   maxId = 0;
 
   maxKey = 0;
+
   state = {
     displayFilter: 'all',
     editDescription: '',
@@ -19,7 +20,7 @@ class App extends Component {
     ],
   };
 
-  filterItems = (select) =>{
+  filterItems = (select) => {
     const { taskData } = this.state;
         if (select === 'all') return taskData;
             if (select === 'active') return taskData.filter((item) => !item.done);
