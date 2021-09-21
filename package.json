@@ -63,9 +63,9 @@
       }
   },
   "lint-staged": {
-      "*.jsx": [
-          "npm run lint:fix",
-          "prettier",
+    "*.{js,jsx}": [
+        "eslint",
+        "prettier --write",
           "git add"
       ]
   }
