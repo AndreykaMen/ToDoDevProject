@@ -16,7 +16,7 @@
   "scripts": {
     "lint": "eslint \"**/*.{js,jsx}\"",
     "lint:fix": "eslint \"**/*.{js,jsx}\" --fix",
-    "format": "prettier",
+    "format": "prettier  — write src/**/*.{js,jsx}",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -65,7 +65,7 @@
   "lint-staged": {
       "*.{js,jsx}": [
           "npm run lint:fix",
-          "prettier  — write src/**/*.{js,jsx}",
+          "format",
           "git add"
       ]
   }
