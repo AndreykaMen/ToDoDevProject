@@ -20,7 +20,7 @@ const TaskList = ({ task, onToggleCompleted, onDeleted, showEditTask, editItemTa
 };
 TaskList.defaultProps = {
   taskElement: null,
-};
+}
 
 TaskList.propTypes = {
   onToggleCompleted: PropTypes.func.isRequired,
