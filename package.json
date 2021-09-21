@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "pre-commit": "eslint \"**/*.{js,jsx}\" --fix"
+    "pre-commit": "npm run lint:fix"
   },
   "husky": {
     "hooks": {
