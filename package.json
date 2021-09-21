@@ -62,7 +62,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint:fix",
+        "eslint \"**/*.{js,jsx}\" --fix",
       "npm run format"
     ]
    
