@@ -6,6 +6,7 @@ import Footer from './Footer';
 
 class App extends Component {
   maxId = 0;
+  
   maxKey = 0;
   state = {
     displayFilter: 'all',
