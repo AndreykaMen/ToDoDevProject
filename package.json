@@ -17,6 +17,7 @@
     "lint": "eslint \"**/*.{js,jsx}\"",
     "lint:fix": "eslint \"**/*.{js,jsx}\" --fix",
     "prettier": "prettier --write src/**/*.{js,jsx}",
+    "pre-commit": "eslint",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
