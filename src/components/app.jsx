@@ -6,8 +6,8 @@ import Footer from './Footer';
 
 class App extends Component {
   maxId = 0;
-  maxKey = 0;
 
+  maxKey = 0;
   state = {
     displayFilter: 'all',
     editDescription: '',
@@ -19,73 +19,73 @@ class App extends Component {
     ],
   };
 
-  filterItems = (select) => {
+  filterItems = ( select ) => {
     const { taskData } = this.state;
-    if (select === 'all') return taskData;
-    if (select === 'active') return taskData.filter((item) => !item.done);
-    if (select === 'completed') return taskData.filter((item) => item.done);
+    if ( select === 'all' ) return taskData;
+    if ( select === 'active' ) return taskData.filter( ( item ) => !item.done );
+    if ( select === 'completed' ) return taskData.filter( ( item ) => item.done );
   };
 
-  selectedButton = (id, classSelect) =>
-    this.setState(({ filterButtonData }) => ({
-      displayFilter: classSelect,
-      filterButtonData: filterButtonData.map((elem) => {
-        elem.toggle = elem.id === id;
-        return elem;
-      }),
-    }));
+  selectedButton = ( id, classSelect ) =>
+      this.setState( ( { filterButtonData } ) => ({
+        displayFilter: classSelect,
+        filterButtonData: filterButtonData.map( ( elem ) => {
+          elem.toggle = elem.id === id;
+          return elem;
+        } ),
+      }) );
 
-  showEditTask = (id) =>
-    this.setState(({ taskData }) =>
-      taskData.map((item) =>
-        item.id !== id && item.edit === 'editing' ? (item.edit = '') : item.id === id ? (item.edit = 'editing') : null
-      )
-    );
+  showEditTask = ( id ) =>
+      this.setState( ( { taskData } ) =>
+          taskData.map( ( item ) =>
+              item.id !== id && item.edit === 'editing' ? (item.edit = '') : item.id === id ? (item.edit = 'editing') : null
+          )
+      );
 
-  editItemTask = (text) =>
-    this.setState({
-      editDescription: text,
-    });
+  editItemTask = ( text ) =>
+      this.setState( {
+        editDescription: text,
+      } );
 
-  editSubmit = (event, id) => {
+  editSubmit = ( event, id ) => {
     const { editDescription } = this.state;
     event.preventDefault();
-    if (editDescription.length > 0) {
-      this.setState(({ taskData, editDescription }) => ({
-        taskData: taskData.map((item) => {
-          if (item.id === id) {
+    if ( editDescription.length > 0 ) {
+      this.setState( ( { taskData, editDescription } ) => ({
+        taskData: taskData.map( ( item ) => {
+          if ( item.id === id ) {
             item.description = editDescription;
             item.edit = '';
           }
           return item;
-        }),
-      }));
+        } ),
+      }) );
     }
   };
 
-  toggleCompleted = (id, classItem) =>
-    this.setState(({ taskData }) => ({
-      taskData: taskData.map((elem) => {
-        if (elem.id === id) {
-          elem.done = !elem.done;
-          elem.classItem = 'completed';
-          if (classItem) elem.classItem = '';
-        }
-        return elem;
-      }),
-    }));
+  toggleCompleted = ( id, classItem ) =>
+      this.setState( ( { taskData } ) => ({
+        taskData: taskData.map( ( elem ) => {
+          if ( elem.id === id ) {
+            elem.done = !elem.done;
+            elem.classItem = 'completed';
+            if ( classItem ) elem.classItem = '';
+          }
+          return elem;
+        } ),
+      }) );
 
-  deleteItem = (id) =>
-    this.setState(({ taskData }) => ({
-      taskData: taskData.filter((item, itemIdx) => itemIdx !== taskData.findIndex((el) => el.id === id)),
-    }));
+  deleteItem = ( id ) =>
+      this.setState( ( { taskData } ) => ({
+        taskData: taskData.filter( ( item, itemIdx ) => itemIdx !== taskData.findIndex( ( el ) => el.id === id ) ),
+      }) );
 
   deleteCompletedList = () =>
-    this.setState(({ taskData }) => ({
-      taskData: taskData.filter((item) => !item.done),
-    }));
+      this.setState( ( { taskData } ) => ({
+        taskData: taskData.filter( ( item ) => !item.done ),
+      }) );
 
-  createTodoItem = (textDescriptor) => ({
+  createTodoItem = ( textDescriptor ) => ({
     description: textDescriptor,
     important: false,
     classItem: '',
@@ -96,38 +96,38 @@ class App extends Component {
     keyTask: this.maxKey++,
   });
 
-  addItem = (text) => {
-    if (text) {
-      this.setState(({ taskData }) => ({ taskData: [...taskData, this.createTodoItem(text)] }));
+  addItem = ( text ) => {
+    if ( text ) {
+      this.setState( ( { taskData } ) => ({ taskData: [...taskData, this.createTodoItem( text )] }) );
     }
   };
 
   render() {
     const { displayFilter, taskData, filterButtonData } = this.state;
-    const countActiveTask = taskData.filter((el) => !el.done).length;
+    const countActiveTask = taskData.filter( ( el ) => !el.done ).length;
     return (
-      <section className="todoapp">
-        <header className="header">
-          <h1>todos</h1>
-          <NewTaskForm onItemAdded={this.addItem} />
-        </header>
-        <section className="main">
-          <TaskList
-            task={this.filterItems(displayFilter)}
-            onToggleCompleted={this.toggleCompleted}
-            onDeleted={this.deleteItem}
-            showEditTask={this.showEditTask}
-            editItemTask={this.editItemTask}
-            editSubmit={this.editSubmit}
-          />
-          <Footer
-            filterData={filterButtonData}
-            onSelectedButton={this.selectedButton}
-            deleteCompletedList={this.deleteCompletedList}
-            countActiveTask={countActiveTask}
-          />
+        <section className="todoapp">
+          <header className="header">
+            <h1>todos</h1>
+            <NewTaskForm onItemAdded={ this.addItem }/>
+          </header>
+          <section className="main">
+            <TaskList
+                task={ this.filterItems( displayFilter ) }
+                onToggleCompleted={ this.toggleCompleted }
+                onDeleted={ this.deleteItem }
+                showEditTask={ this.showEditTask }
+                editItemTask={ this.editItemTask }
+                editSubmit={ this.editSubmit }
+            />
+            <Footer
+                filterData={ filterButtonData }
+                onSelectedButton={ this.selectedButton }
+                deleteCompletedList={ this.deleteCompletedList }
+                countActiveTask={ countActiveTask }
+            />
+          </section>
         </section>
-      </section>
     );
   }
 }
