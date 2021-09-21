@@ -16,6 +16,7 @@
   "scripts": {
     "lint": "eslint src/**/*.jsx",
     "lint:fix": "eslint src/**/*.jsx --fix",
+    "lint-staged": "lint-staged",
     "format": "prettier --write src/**/*.jsx",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -59,12 +60,12 @@
   },
   "husky": {
     "hooks": {
-      "commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
   },
   "lint-staged": {
     "src/**/*.jsx": [
-      "npm run lint:fix",
+      "lint:fix",
       "npm run format"
     ]
   }
