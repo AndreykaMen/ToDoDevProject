@@ -69,5 +69,5 @@
       "prettier --write",
       "git add"
     ]
-  },
+  }
 }
