@@ -16,8 +16,7 @@
   "scripts": {
     "lint": "eslint src/**/*.jsx",
     "lint:fix": "eslint src/**/*.jsx --fix",
-    "prettier": "prettier --write src/**/*.jsx",
-    "pre-commit": "lint-staged",
+    "format": "prettier --write src/**/*.jsx",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -60,13 +59,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "commit": "lint-staged"
     }
   },
   "lint-staged": {
     "src/**/*.jsx": [
       "npm run lint:fix",
-      "prettier"
+      "npm run format"
     ]
   }
 }
