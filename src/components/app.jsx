@@ -8,7 +8,6 @@ class App extends Component {
   maxId = 0;
 
   maxKey = 0;
-
   state = {
     displayFilter: 'all',
     editDescription: '',
@@ -21,10 +20,10 @@ class App extends Component {
   };
 
   filterItems = (select) => {
-        const { taskData } = this.state;
+    const { taskData } = this.state;
     if (select === 'all') return taskData;
-        if (select === 'active') return taskData.filter((item) => !item.done);
-            if (select === 'completed') return taskData.filter((item) => item.done);
+    if (select === 'active') return taskData.filter((item) => !item.done);
+    if (select === 'completed') return taskData.filter((item) => item.done)
   };
 
   selectedButton = (id, classSelect) =>
@@ -42,7 +41,6 @@ class App extends Component {
         item.id !== id && item.edit === 'editing' ? (item.edit = '') : item.id === id ? (item.edit = 'editing') : null
       )
     );
-
   editItemTask = (text) =>
     this.setState({
       editDescription: text,
