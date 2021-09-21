@@ -24,16 +24,16 @@
   },
   "husky": {
     "hooks": {
-        "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged"
     }
-},
-"lint-staged": {
-  "*.{js,jsx}": [
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
       "npm run lint:fix",
       "prettier --write",
-        "git add"
+      "git add"
     ]
-}
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -69,5 +69,4 @@
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1"
   }
- 
 }
