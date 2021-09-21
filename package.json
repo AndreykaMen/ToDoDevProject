@@ -23,6 +23,17 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npm run lint:fix",
+      "npm run format"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -57,16 +68,5 @@
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,jsx}": [
-      "npm run lint:fix",
-      "npm run format"
-    ]
   }
 }
