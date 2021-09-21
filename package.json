@@ -22,15 +22,16 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "husky": {
-    "hooks": "lint-staged"
-  },
   "lint-staged": {
     "**/*.{js,jsx}": [
       "npm run lint",
       "npm run format"
     ]
   },
+  "husky": {
+    "hooks": "lint-staged"
+  },
+  
   "eslintConfig": {
     "extends": [
       "react-app",
